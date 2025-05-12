@@ -7,7 +7,7 @@ def chat(prompt):
     )
     return response.choices[0].message.content.strip()
 if __name__ == "__main__":
-    while True:
+    while True: 
         abc = input("Type prompt:-->")
         if abc.lower() in ['exit', 'break', 'shutdown', 'shut down', 'close']:
             break
