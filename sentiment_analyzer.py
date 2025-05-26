@@ -4,7 +4,6 @@ import argparse
 import json
 from dotenv import load_dotenv
 load_dotenv()
-
 class OpenAISentimentAnalyzer:
     """
     A class to analyze sentiment and extract insights from text using OpenAI's models.
