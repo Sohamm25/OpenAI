@@ -179,7 +179,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Ensure we have either text or file to analyze
     if not args.text and not args.file:
         parser.error("Either --text or --file must be provided")
     
