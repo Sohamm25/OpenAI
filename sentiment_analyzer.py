@@ -8,7 +8,7 @@ class OpenAISentimentAnalyzer:
     """
     A class to analyze sentiment and extract insights from text using OpenAI's models.
     """
-    
+
     def __init__(self, api_key=None):
         """
         Initialize the OpenAI client with the API key.
