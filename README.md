@@ -2,7 +2,7 @@
 
 This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, and sentiment analysis.
 
-## Getting Started
+## Getting Started 
 
 To use the scripts in this repository, ensure you have the following prerequisites:
 
