@@ -1,6 +1,6 @@
 # OpenAI-Python Examples
 
-This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, and sentiment analysis.
+This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, sentiment analysis, and AI-powered code review.
 
 ## Getting Started 
 
@@ -14,7 +14,7 @@ To use the scripts in this repository, ensure you have the following prerequisit
   ```
 - **Additional libraries** (depending on the script):
   ```bash
-  pip install python-dotenv pillow requests
+  pip install python-dotenv pillow requests pathlib
   ```
 - **OpenAI API Key**: You'll need to set up an account on [OpenAI](https://openai.com/) and obtain an API key
 
@@ -156,6 +156,119 @@ sentiment_result = analyzer.analyze_sentiment(text)
 print(sentiment_result)
 ```
 
+## 5 - AI Code Reviewer
+
+An intelligent code review tool that leverages OpenAI's advanced language models to analyze code quality, identify bugs, suggest improvements, and enforce best practices across multiple programming languages.
+
+### Features
+- **Multi-Language Support**: Supports Python, JavaScript, Java, C++, C#, PHP, Ruby, Go, Rust, and TypeScript
+- **Comprehensive Analysis**: 
+  - Code quality issues and potential bugs
+  - Best practices adherence
+  - Performance bottlenecks identification
+  - Security vulnerability detection
+  - Code readability and maintainability suggestions
+  - Overall code rating (1-10 scale)
+- **Flexible Input Methods**:
+  - Single file analysis
+  - Multiple file batch processing
+  - Direct code snippet review
+- **Professional Reporting**: Generates detailed markdown reports for team reviews
+- **Interactive CLI**: User-friendly command-line interface
+- **Line-specific Feedback**: Provides actionable suggestions with line references
+
+### Usage
+
+**Interactive Mode:**
+```bash
+python ai_code_reviewer.py
+```
+
+**Programmatic Usage:**
+```python
+from ai_code_reviewer import AICodeReviewer
+
+# Initialize the reviewer
+reviewer = AICodeReviewer()
+
+# Review a single file
+review_result = reviewer.review_file("my_script.py")
+print(review_result)
+
+# Review multiple files and generate report
+file_paths = ["script1.py", "script2.js", "utils.java"]
+results = reviewer.review_multiple_files(file_paths)
+report = reviewer.generate_report(results, "team_code_review.md")
+
+# Analyze code snippet directly
+code_snippet = '''
+def calculate_factorial(n):
+    if n == 0:
+        return 1
+    return n * calculate_factorial(n-1)
+'''
+analysis = reviewer.analyze_code(code_snippet, "python", "factorial.py")
+print(analysis)
+```
+
+**Command-line Examples:**
+```bash
+# Review a single Python file
+python ai_code_reviewer.py --file main.py
+
+# Review multiple files and generate report
+python ai_code_reviewer.py --files "*.py" --output code_review_report.md
+
+# Review code with specific focus areas
+python ai_code_reviewer.py --file app.js --focus security,performance
+```
+
+### Sample Output
+```
+## Code Review for sample.py
+
+### Code Quality Issues
+- **Line 3**: Potential division by zero error when `len(numbers) == 0`
+- **Line 8**: Using `range(len())` is not Pythonic
+
+### Best Practices
+- Use built-in `sum()` function instead of manual loop
+- Consider using list comprehension for data processing
+- Add input validation and error handling
+
+### Performance
+- The current implementation has O(n) complexity which is optimal
+- Consider using generator expressions for large datasets
+
+### Security
+- No major security concerns identified
+- Add input validation for untrusted data
+
+### Overall Rating: 6/10
+The code is functional but lacks error handling and doesn't follow Python best practices.
+```
+
+### Advanced Features
+
+**Custom Analysis Profiles:**
+```python
+# Create custom review profiles for different team standards
+reviewer.set_profile("strict", {
+    "max_function_length": 20,
+    "require_docstrings": True,
+    "enforce_type_hints": True
+})
+
+# Apply profile to review
+review = reviewer.review_file("code.py", profile="strict")
+```
+
+**Integration with CI/CD:**
+```bash
+# Use in GitHub Actions or other CI systems
+python ai_code_reviewer.py --ci-mode --files "src/**/*.py" --fail-on-rating 5
+```
+
 ## API Usage and Costs
 
 Please note that using the OpenAI API incurs costs based on token usage. Be mindful of:
@@ -163,6 +276,69 @@ Please note that using the OpenAI API incurs costs based on token usage. Be mind
 - The length of input text
 - The models you use (GPT-4 is more expensive than GPT-3.5-turbo)
 - Image generation costs for DALL-E
+- Code review analysis can be token-intensive for large files
+
+### Cost Optimization Tips
+- Use GPT-3.5-turbo for basic code reviews to reduce costs
+- Review smaller code chunks rather than entire large files
+- Cache results for frequently reviewed code sections
+- Set token limits for very large files
+
+## File Structure
+
+```
+OpenAI/
+├── Chatbot_openai.py              # Interactive chatbot
+├── AI_Powered_Text_Summarizer.py  # Text summarization tool
+├── dalle_image_generator.py       # DALL-E image generation
+├── sentiment_analyzer.py          # Sentiment analysis tool
+├── ai_code_reviewer.py           # AI-powered code reviewer
+├── requirements.txt              # Python dependencies
+├── .env.example                  # Environment variables template
+├── README.md                     # This file
+└── examples/                     # Usage examples
+    ├── sample_code/              # Sample code for testing reviewer
+    ├── test_data/                # Test data for various tools
+    └── reports/                  # Generated reports
+```
+
+## Contributing
+
+We welcome contributions! Please feel free to submit pull requests or open issues for:
+- Bug fixes
+- New features
+- Additional programming language support for code reviewer
+- Performance improvements
+- Documentation updates
+
+### Guidelines
+1. Follow PEP 8 style guidelines for Python code
+2. Add docstrings to all functions and classes
+3. Write unit tests for new features
+4. Update README.md with new functionality
+
+## Troubleshooting
+
+### Common Issues
+
+**API Key Issues:**
+```bash
+# Verify your API key is set correctly
+echo $OPENAI_API_KEY
+
+# Or check if .env file exists and is properly formatted
+cat .env
+```
+
+**Rate Limiting:**
+- Implement retry logic with exponential backoff
+- Consider using multiple API keys for high-volume usage
+- Monitor your API usage through OpenAI dashboard
+
+**Large File Processing:**
+- Break large files into smaller chunks
+- Use streaming for real-time analysis
+- Consider preprocessing to remove comments/whitespace
 
 ## License
 
@@ -172,3 +348,17 @@ MIT License
 
 - [OpenAI](https://openai.com/) for providing the APIs
 - All contributors to this project
+- The open-source community for inspiration and best practices
+
+## Support
+
+If you encounter any issues or have questions:
+1. Check the troubleshooting section above
+2. Open an issue on GitHub
+3. Review the OpenAI API documentation
+4. Check your API usage and billing status
+
+---
+
+*Last updated: [Current Date]*
+*Version: 2.0.0*
