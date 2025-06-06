@@ -190,8 +190,6 @@ def process_data(data):
             result.append(item * 2)
     return result
     '''
-    
-    # Create reviewer instance
     reviewer = AICodeReviewer()
     
     # Analyze sample code
