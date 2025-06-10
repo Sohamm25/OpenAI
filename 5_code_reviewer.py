@@ -2,7 +2,6 @@ import openai
 import os
 import json
 from pathlib import Path
-
 class AICodeReviewer:
     def __init__(self, api_key=None):
         """Initialize the AI Code Reviewer"""
