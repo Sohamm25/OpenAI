@@ -1,5 +1,5 @@
 # OpenAI-Python Examples
- 
+  
 This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, sentiment analysis, AI-powered code review, and email writing.
  
 ## Getting Started 
