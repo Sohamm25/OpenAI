@@ -1,6 +1,6 @@
 # OpenAI-Python Examples
 
-This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, sentiment analysis, and AI-powered code review.
+This repository contains various Python scripts and examples using the OpenAI library. Each script demonstrates different ways to interact with OpenAI's API, including chatbots, text generation, image creation, sentiment analysis, AI-powered code review, and email writing.
  
 ## Getting Started 
 
@@ -211,62 +211,79 @@ analysis = reviewer.analyze_code(code_snippet, "python", "factorial.py")
 print(analysis)
 ```
 
-**Command-line Examples:**
+## 6 - Simple Email Writer
+
+A straightforward tool that helps you write professional emails using OpenAI's language models.
+
+### Features
+- **Write New Emails**: Create emails from scratch based on purpose and key points
+- **Improve Existing Emails**: Make your emails more professional and clear
+- **Multiple Tones**: Choose from professional, friendly, or formal tones
+- **Interactive Interface**: Easy-to-use command-line interface
+
+### Usage
+
+**Run the interactive email writer:**
 ```bash
-# Review a single Python file
-python ai_code_reviewer.py --file main.py
-
-# Review multiple files and generate report
-python ai_code_reviewer.py --files "*.py" --output code_review_report.md
-
-# Review code with specific focus areas
-python ai_code_reviewer.py --file app.js --focus security,performance
+python simple_email_writer.py
 ```
 
-### Sample Output
+**Example workflow:**
 ```
-## Code Review for sample.py
+📧 Simple Email Writer using OpenAI
+========================================
 
-### Code Quality Issues
-- **Line 3**: Potential division by zero error when `len(numbers) == 0`
-- **Line 8**: Using `range(len())` is not Pythonic
+What would you like to do?
+1. Write a new email
+2. Improve an existing email
+3. Exit
 
-### Best Practices
-- Use built-in `sum()` function instead of manual loop
-- Consider using list comprehension for data processing
-- Add input validation and error handling
+Enter your choice (1-3): 1
 
-### Performance
-- The current implementation has O(n) complexity which is optimal
-- Consider using generator expressions for large datasets
+--- Write New Email ---
+What is the email for? (e.g., meeting request, follow up): meeting request
+Who are you sending to? (e.g., John, my manager): Sarah from marketing
+What do you want to say? (main points): discuss new product launch timeline
+Tone (professional/friendly/formal) [default: professional]: 
 
-### Security
-- No major security concerns identified
-- Add input validation for untrusted data
+⏳ Writing your email...
 
-### Overall Rating: 6/10
-The code is functional but lacks error handling and doesn't follow Python best practices.
+✅ Here's your email:
+----------------------------------------
+Subject: Meeting Request - Product Launch Timeline Discussion
+
+Hi Sarah,
+
+I hope this email finds you well. I would like to schedule a meeting to discuss the new product launch timeline.
+
+Would you be available for a brief meeting this week to go over the details and coordinate our efforts? I'm flexible with timing and can work around your schedule.
+
+Please let me know what works best for you.
+
+Best regards,
+[Your Name]
+----------------------------------------
 ```
 
-### Advanced Features
-
-**Custom Analysis Profiles:**
+**Programmatic Usage:**
 ```python
-# Create custom review profiles for different team standards
-reviewer.set_profile("strict", {
-    "max_function_length": 20,
-    "require_docstrings": True,
-    "enforce_type_hints": True
-})
+from simple_email_writer import SimpleEmailWriter
 
-# Apply profile to review
-review = reviewer.review_file("code.py", profile="strict")
-```
+# Initialize the writer
+writer = SimpleEmailWriter()
 
-**Integration with CI/CD:**
-```bash
-# Use in GitHub Actions or other CI systems
-python ai_code_reviewer.py --ci-mode --files "src/**/*.py" --fail-on-rating 5
+# Write a new email
+email = writer.write_email(
+    purpose="follow up meeting",
+    recipient="John",
+    key_points="discuss project status and next steps",
+    tone="professional"
+)
+print(email)
+
+# Improve an existing email
+improved = writer.improve_email("hey john, whats up with the project?")
+print(improved)
 ```
 
 ## API Usage and Costs
@@ -279,10 +296,10 @@ Please note that using the OpenAI API incurs costs based on token usage. Be mind
 - Code review analysis can be token-intensive for large files
 
 ### Cost Optimization Tips
-- Use GPT-3.5-turbo for basic code reviews to reduce costs
-- Review smaller code chunks rather than entire large files
-- Cache results for frequently reviewed code sections
-- Set token limits for very large files
+- Use GPT-3.5-turbo for basic tasks to reduce costs
+- Keep prompts concise and focused
+- Cache results for frequently used content
+- Monitor your usage through the OpenAI dashboard
 
 ## File Structure
 
@@ -293,6 +310,7 @@ OpenAI/
 ├── dalle_image_generator.py       # DALL-E image generation
 ├── sentiment_analyzer.py          # Sentiment analysis tool
 ├── ai_code_reviewer.py           # AI-powered code reviewer
+├── simple_email_writer.py        # Simple email writing tool
 ├── requirements.txt              # Python dependencies
 ├── .env.example                  # Environment variables template
 ├── README.md                     # This file
@@ -360,5 +378,5 @@ If you encounter any issues or have questions:
 
 ---
 
-*Last updated: [Current Date]*
-*Version: 2.0.0*
+*Last updated: July 2025*
+*Version: 2.1.0*
