@@ -9,7 +9,7 @@ To use the scripts in this repository, ensure you have the following prerequisit
 ### Prerequisites
 - **Python 3.x**
 - **OpenAI Python Library**: Install via pip:
-  ```bash
+  ```bash 
   pip install openai
   ```
 - **Additional libraries** (depending on the script):
